@@ -22,7 +22,7 @@ func Register(session *wxweb.Session) {
 }
 
 var adminReg = regexp.MustCompile(`(管理员)+`)
-var kickReg = regexp.MustCompile(`^@(.+)? \[菜刀\]`)//[足球]
+var kickReg = regexp.MustCompile(`^@(.+)\S+\[菜刀\]`)//[足球]
 
 // 消息处理函数
 func handle(session *wxweb.Session, msg *wxweb.ReceivedMessage) {

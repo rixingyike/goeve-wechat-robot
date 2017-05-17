@@ -33,7 +33,7 @@ func handle(session *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	// 可选:可以用contact manager来过滤, 过滤掉没有保存到通讯录的群
 	contact := session.Cm.GetContactByUserName(msg.FromUserName)
 	if contact == nil {
-		logs.Error("ignore the messages from", msg.FromUserName)
+		logs.Error("该群可能未保存到通讯录", msg.FromUserName)
 		return
 	}
 
