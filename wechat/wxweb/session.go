@@ -643,5 +643,5 @@ func (this *Session) LoadConfig(){
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(bs, &this.Config)
+	json.Unmarshal(bs, &this.Config)
 }
