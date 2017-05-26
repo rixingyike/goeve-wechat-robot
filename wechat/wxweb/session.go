@@ -641,7 +641,7 @@ var invitedFriendIntoGroupReg = regexp.MustCompile("^(.+)邀请\"(.+)\"加入了
 func (this *Session) LoadConfig(){
 	bs, err := ioutil.ReadFile("./config.json")
 	if err != nil {
-		return err
+		return
 	}
 	json.Unmarshal(bs, &this.Config)
 }
