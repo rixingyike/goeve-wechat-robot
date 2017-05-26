@@ -84,6 +84,7 @@ func CreateSession(common *Common, handlerRegister *HandlerRegister) (*Session, 
 		WxWebCommon: common,
 		QrcodeUUID:  uuid,
 		WxWebXcg:&XmlConfig{},
+		Cm:&ContactManager{},
 	}
 	session.Cache = &Cache{session:session}
 	session.LoadConfig()
@@ -227,13 +228,9 @@ func (s *Session) LoginAndServe(useCache bool) error {
 		return fmt.Errorf("WebWxStatusNotify fail, %d", ret)
 	}
 
-	cb, err := WebWxGetContact(s.Client, s.WxWebCommon, s.WxWebXcg, s.Cookies)
-	if err != nil {
-		return err
-	}
-
-	s.Cm, err = CreateContactManagerFromBytes(cb)
-	if err != nil {
+	if err := s.RetrieveAllContact(); err != nil {
+		// 获取联系人失败,为0,删除cookie缓存
+		s.DeleteCookieCache()
 		return err
 	}
 
@@ -242,6 +239,55 @@ func (s *Session) LoginAndServe(useCache bool) error {
 	if err := s.serve(); err != nil {
 		return err
 	}
+	return nil
+}
+
+//删除缓存使用二维码登陆
+func (this *Session) DeleteCookieCache(){
+	os.Remove("./cache.json")
+}
+
+// 循环拉取联系人,直到seq=0
+func (s *Session) RetrieveAllContact() error {
+	var seq = 0
+	for {
+		cb, err := WebWxGetContact(s.Client, s.WxWebCommon, s.WxWebXcg, s.Cookies, seq)
+		if err != nil {
+			return err
+		}
+		var cr ContactResponse
+		if err := json.Unmarshal(cb, &cr); err != nil {
+			return err
+		}
+		// 处理user type
+		for _, u := range cr.MemberList {
+			if u.VerifyFlag/8 != 0 {
+				u.Type = USER_TYPE_OFFICAL
+			} else if strings.HasPrefix(u.UserName, `@@`) {
+				u.Type = USER_TYPE_GROUP
+			} else {
+				u.Type = USER_TYPE_FRIEND
+			}
+		}
+
+		if s.Cm.cl == nil {
+			s.Cm.cl = cr.MemberList
+		}else{
+			s.Cm.cl = append(s.Cm.cl, cr.MemberList...)
+		}
+
+		logs.Warn("已获取一批联系人:",len(s.Cm.cl))
+		seq = cr.Seq
+		if seq == 0 {
+			break
+		}
+	}
+	var n = len(s.Cm.cl)
+	logs.Warn("已获取全部联系人:",n)
+	if n == 0 {
+		return fmt.Errorf("get all contact error")
+	}
+
 	return nil
 }
 
@@ -336,6 +382,7 @@ func (s *Session) consumer(msg []byte) {
 			} else {
 				v[`Type`] = USER_TYPE_FRIEND
 				//mcts = append(mcts, v)
+				//logs.Warn("jc",jc)
 				// 为什么自己删除好友也会走到这里,走的是修改,并不是删除
 				if u,isNewFriend,err := s.Cm.UpdateContact(v); err == nil {//如果是新增用户,派发一个消息
 					if isNewFriend {
@@ -424,6 +471,8 @@ func (s *Session) SendText(msg, from, to string) (string, string, error) {
 	}
 	msgID, _ := jc.GetString("MsgID")
 	localID, _ := jc.GetString("LocalID")
+	// 每发过一次消息,暂停200毫秒
+	time.Sleep(time.Millisecond * time.Duration(200))
 	return msgID, localID, nil
 }
 

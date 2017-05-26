@@ -1,17 +1,17 @@
 {
   "version": 1,
-  "name": "小箐",
+  "name": "机器猫",
 
   "enable_auto_vefiry":true,
-  "new_friend_greeting_words":"我是小箐,手绘作者,野生网络作家,请多关照~",
+  "new_friend_greeting_words":"hi,我是机器猫,梦想是麻豆,请多关照~",
 
   "enable_welcome_new_group_member":true,
   "new_group_member_greeting_words": {
-    "「光明顶」日行一刻修行公社": "本群为日行一刻团队议事群,除恶扬善,唯光明故~"
+    "「智能」日行一刻修行公社": "本群为日行一刻人工智能助理讨论群~,欢迎邀请好友,入群方式:加群主微信,发送「智能」二字"
   },
 
   "enable_keyword_invite_friend":true,
   "invite_friend_keywords": {
-    "光明顶": "「光明顶」日行一刻修行公社"
+    "智能": "「智能」日行一刻修行公社"
   }
 }

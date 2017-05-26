@@ -2,14 +2,11 @@ package main
 
 import (
 	"./wechat/logs"
-	"./wechat/plugins/switcher"
 	"./wechat/wxweb"
 	"time"
-	//"./wechat/plugins/mydemo"
 	"./wechat/plugins/auto_verify"
 	"./wechat/plugins/new_friend"
 	"./wechat/plugins/new_group_member"
-	"./wechat/plugins/kick_member"
 	"./wechat/plugins/keyword_invite_friend"
 )
 
@@ -23,16 +20,6 @@ func main() {
 		return
 	}
 	// load plugins for this session
-
-	//mydemo.Register(session)//插件示例
-	//session.HandlerRegister.EnableByName("mydemo")
-
-	// enable plugin
-	switcher.Register(session)
-	session.HandlerRegister.EnableByName("switcher")
-
-	kick_member.Register(session)
-	session.HandlerRegister.EnableByName("kick_member")
 
 	if session.Config.EnableAutoVefiry {
 		auto_verify.Register(session)
@@ -48,11 +35,6 @@ func main() {
 		keyword_invite_friend.Register(session)
 		session.HandlerRegister.EnableByName("keyword_invite_friend")
 	}
-
-	// disable by type example
-	//if err := session.HandlerRegister.EnableByType(wxweb.MSG_TEXT); err != nil {
-	//	logs.Error(err)
-	//}
 
 	for {
 		if err := session.LoginAndServe(true); err != nil {

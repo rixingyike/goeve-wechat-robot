@@ -31,6 +31,6 @@ func handle(session *wxweb.Session, msg *wxweb.ReceivedMessage) {
 	}else if sex == wxweb.USER_SEX_FEMALE {
 		words = "[玫瑰]"
 	}
-	words = fmt.Sprintf("%s\n\n%s", words, session.Config.NewFriendGreetingWords)
+	words = fmt.Sprintf("%s%s", words, session.Config.NewFriendGreetingWords)
 	session.SendText(words, session.Bot.UserName, u.UserName)
 }

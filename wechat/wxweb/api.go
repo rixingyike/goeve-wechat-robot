@@ -18,6 +18,8 @@ import (
 	"sync/atomic"
 	"time"
 	"../logs"
+	//"gopkg.in/h2non/filetype.v1"
+	//"gopkg.in/h2non/filetype.v1/types"
 )
 
 // todo 这个文件中的网络请求,可以进一步抽象成通用函数,像ggbot
@@ -245,7 +247,7 @@ func WebWxSync(client *http.Client, common *Common, ce *XmlConfig, cookies []*ht
 			common.DeviceID,
 		},
 		SyncKey: skl,
-		rr:      ^int(time.Now().Unix()) + 1,
+		rr:      int(^time.Now().Unix()),
 	}
 
 	b, _ := json.Marshal(js)
@@ -323,10 +325,10 @@ func WebWxStatusNotify(client *http.Client, common *Common, ce *XmlConfig, bot *
 }
 
 // WebWxGetContact: webwxgetcontact api
-func WebWxGetContact(client *http.Client, common *Common, ce *XmlConfig, cookies []*http.Cookie) ([]byte, error) {
+func WebWxGetContact(client *http.Client, common *Common, ce *XmlConfig, cookies []*http.Cookie, seq int) ([]byte, error) {
 	km := url.Values{}
 	km.Add("r", strconv.FormatInt(time.Now().Unix(), 10))
-	km.Add("seq", "0")
+	km.Add("seq", strconv.Itoa(seq))
 	km.Add("skey", ce.Skey)
 	uri := common.CgiUrl + "/webwxgetcontact?" + km.Encode()
 
