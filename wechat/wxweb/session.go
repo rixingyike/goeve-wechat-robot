@@ -18,6 +18,7 @@ import (
 	"net"
 	"regexp"
 	"../../../simplemvc/go"
+	"github.com/skratchdot/open-golang/open"
 )
 
 const (
@@ -133,11 +134,13 @@ func (s *Session) ShowQrcode(qrmode int) error {
 		if err != nil {
 			return err
 		}
-		ls := rrstorage.CreateLocalDiskStorage("../public/qrcode/")
+		ls := rrstorage.CreateLocalDiskStorage("./public/")
 		if err := ls.Save(qrcb, "qrcode.jpg"); err != nil {
 			return err
 		}
-		s.QrcodePath = "/public/qrcode/" + s.QrcodeUUID + ".jpg"
+		s.QrcodePath = "./public/qrcode.jpg"
+		logs.Info("qrcode path", s.QrcodePath)
+		open.Start(s.QrcodePath)
 	}
 	return nil
 }
@@ -194,7 +197,7 @@ func (s *Session) LoginAndServe(useCache bool) error {
 	logs.Info("useCache:",useCache)
 	if !useCache || s.Cache.Load() != nil {
 		//显示终端二维码
-		s.ShowQrcode(TERMINAL_MODE)
+		s.ShowQrcode(WEB_MODE)
 
 		if err := s.scanWaiter(); err != nil {
 			return err
