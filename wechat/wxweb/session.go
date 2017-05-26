@@ -17,7 +17,6 @@ import (
 	"crypto/tls"
 	"net"
 	"regexp"
-	"../../../simplemvc/go"
 	"github.com/skratchdot/open-golang/open"
 )
 
@@ -640,5 +639,9 @@ var invitedFriendIntoGroupReg = regexp.MustCompile("^(.+)邀请\"(.+)\"加入了
 
 //从同目录config.json中读取配置
 func (this *Session) LoadConfig(){
-	sim.ReadJsonFromFile("./config.json", &this.Config)
+	bs, err := ioutil.ReadFile("./config.json")
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(bs, &this.Config)
 }
