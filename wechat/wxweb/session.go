@@ -196,7 +196,7 @@ func (s *Session) LoginAndServe(useCache bool) error {
 	logs.Info("useCache:",useCache)
 	if !useCache || s.Cache.Load() != nil {
 		//显示终端二维码
-		s.ShowQrcode(TERMINAL_MODE)
+		s.ShowQrcode(WEB_MODE)
 
 		if err := s.scanWaiter(); err != nil {
 			return err
