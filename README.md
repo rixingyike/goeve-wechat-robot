@@ -8,7 +8,7 @@ _这是一个简单的智能助理微信机器人,主要有以下功能:_
 
 ###如何使用?
 
-前往网盘[https://pan.baidu.com/s/1jIuqoF8](https://pan.baidu.com/s/1jIuqoF8) 以下文件,密码在live内:
+前往网盘[https://pan.baidu.com/s/1jIuqoF8](https://pan.baidu.com/s/1jIuqoF8) 下载以下文件,密码在live内:
 
 1）下载执行文件
 windows系统请下载sim-robot_win32.exe或sim-robot_win64.exe（xp7使用win32，win7以上使用win64位）
