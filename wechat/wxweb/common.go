@@ -63,7 +63,7 @@ type Common struct {
 	CgiUrl      string//baseurl
 	CgiDomain   string
 	SyncSrv     string
-	UploadUrl   string
+	UploadUrl   string//"https://file.wx.qq.com/cgi-bin/mmwebwx-bin/webwxuploadmedia?f=json",
 	MediaCount  uint32
 	RedirectUri string
 }
