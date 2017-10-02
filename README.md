@@ -27,11 +27,13 @@ mac系统请下载sim-robot_darwin
 
 3）参照live说明，配置好json文件，单击运行
 
-### 听live分享
+### live
 
 查看原理、配置及源码使用说明,请前往知乎live:
 [零编程打造一款私人智能助理](https://www.zhihu.com/lives/846360223609413632)
 
 不想下载执行文件的同学,可自行搭建环境从源码编译,也是一样的。
 
-(注:本项目源码基于[wechat-go](https://github.com/songtianyi/wechat-go)、[beego](https://github.com/beego/bee)等类库修改,在此一并感谢。)
+### 感谢
+
+本项目源码基于[wechat-go](https://github.com/songtianyi/wechat-go)、[beego](https://github.com/beego/bee)等类库修改,在此一并感谢。
