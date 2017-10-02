@@ -35,4 +35,4 @@ mac系统请下载sim-robot_darwin
 
 不想下载执行文件的同学,可自行搭建环境从源码编译,也是一样的。
 
-(注:本项目源码基于[qrterminal](github.com/mdp/qrterminal)、[wechat-go](https://github.com/songtianyi/wechat-go)、[beego](https://github.com/beego/bee)等类库修改,在此一并感谢。)
+(注:本项目源码基于[qrterminal](https://github.com/mdp/qrterminal)、[wechat-go](https://github.com/songtianyi/wechat-go)、[beego](https://github.com/beego/bee)等类库修改,在此一并感谢。)
