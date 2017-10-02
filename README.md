@@ -35,11 +35,4 @@ mac系统请下载sim-robot_darwin
 
 不想下载执行文件的同学,可自行搭建环境从源码编译,也是一样的。
 
-### 参与讨论
-
-我还在开发更多的功能,扫描下方二维码,加阿娟微信,回复"智能",她将拉你进智能机器人开发讨论群:
-![二维码](./wechat/qrcode.png)
-
-马上与大牛们们开始热情的互动吧~
-
 (注:本项目源码基于[qrterminal](github.com/mdp/qrterminal)、[wechat-go](https://github.com/songtianyi/wechat-go)、[beego](https://github.com/beego/bee)等类库修改,在此一并感谢。)
