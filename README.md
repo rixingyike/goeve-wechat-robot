@@ -16,7 +16,7 @@ _这是一个简单的智能助理微信机器人,主要有以下功能:_
 
 ### 如何使用?
 
-前往网盘[https://pan.baidu.com/s/1jIuqoF8](https://pan.baidu.com/s/1jIuqoF8) 下载以下文件,密码在live内:
+前往网盘[https://pan.baidu.com/s/1jIuqoF8](https://pan.baidu.com/s/1jIuqoF8) 下载以下文件
 
 1）下载执行文件
 windows系统请下载sim-robot_win32.exe或sim-robot_win64.exe（xp7使用win32，win7以上使用win64位）
@@ -26,7 +26,6 @@ mac系统请下载sim-robot_darwin
 无论是什么系统，都需要下载config.json，与执行文件放在同一目录下。
 
 3）参照live说明，配置好json文件，单击运行
-详细配置说明见live：[零编程打造一款私人智能助理](https://www.zhihu.com/lives/846360223609413632)
 
 ### 听live分享
 
